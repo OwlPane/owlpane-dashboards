@@ -79,7 +79,7 @@
             "i": 1
           },
           "htmlContent": "",
-          "markdownContent": "<img src=\"https://owlpane.ai/img/logo/logo_horizontal.svg\" width=\"25%\">\n\nThis dashboard provides vitals about distributed installation of Owlpane. Select the namespace in which Owlpane is installed and navigate to the appropriate tabs.\n\nYou can find details about these metrics in the [documentation](https://owlpane.ai/docs/expose-metrics/)\n\nFor support reach out to hello@owlpane.ai"
+          "markdownContent": "<img src=\"https://owlpane.ai/img/logo/logo_horizontal.svg\" width=\"25%\">\n\nThis dashboard provides vitals about distributed installation of Owlpane. Select the namespace in which Owlpane is installed and navigate to the appropriate tabs.\n\nYou can find details about these metrics in the [documentation](https://owlpane.ai/docs/expose-metrics/)\n\nMetrics expect Owlpane ingest/agent/SDK telemetry (see api/docs/observability/dashboard-metrics-catalog.md). For support reach out to hello@owlpane.ai"
         }
       ]
     },
@@ -108,7 +108,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(zo_ingest_wal_read_bytes{namespace=\"$namespace\"}[5m]))by(pod)",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -131,7 +131,7 @@
               }
             },
             {
-              "query": "sum(irate(zo_ingest_wal_write_bytes{namespace=\"$namespace\"}[5m]))by(pod)",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -185,7 +185,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_ingest_wal_used_bytes{namespace=\"$namespace\"}) by (pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"}) by (pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -255,11 +255,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_ingest_memtable_bytes{namespace=\"$namespace\"}) by (pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"}) by (pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "zo_ingest_memtable_arrow_bytes",
+                "stream": "owlpane_ingest_bytes_total",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -278,7 +278,7 @@
               }
             },
             {
-              "query": "sum(zo_ingest_memtable_arrow_bytes{namespace=\"$namespace\"}) by (pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"}) by (pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -365,11 +365,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_ingest_memtable_files{namespace=\"$namespace\"}) by (pod)",
+              "query": "sum(owlpane_ingest_batches_total{namespace=\"$namespace\"}) by (pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "zo_ingest_memtable_arrow_bytes",
+                "stream": "owlpane_ingest_bytes_total",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -452,7 +452,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "histogram_quantile(0.95, sum(irate(zo_ingest_wal_lock_time_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
+              "query": "histogram_quantile(0.95, sum(irate(http_server_duration_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
@@ -475,7 +475,7 @@
               }
             },
             {
-              "query": "histogram_quantile(0.50, sum(irate(zo_ingest_wal_lock_time_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
+              "query": "histogram_quantile(0.50, sum(irate(http_server_duration_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -562,7 +562,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "histogram_quantile(0.95, sum(irate(zo_ingest_memtable_lock_time_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
+              "query": "histogram_quantile(0.95, sum(irate(http_server_duration_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
@@ -585,7 +585,7 @@
               }
             },
             {
-              "query": "histogram_quantile(0.50, sum(irate(zo_ingest_memtable_lock_time_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
+              "query": "histogram_quantile(0.50, sum(irate(http_server_duration_bucket{namespace=\"$namespace\"}[1m])) by (le, pod))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -645,7 +645,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, sum(irate(zo_compact_used_time{namespace=\"$namespace\"}[1m])) by (organization, stream_type))",
+              "query": "topk(10, sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[1m])) by (organization, stream_type))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -698,7 +698,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, sum(irate(zo_compact_merged_files{namespace=\"$namespace\"}[1m])) by (organization, stream_type))",
+              "query": "topk(10, sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[1m])) by (organization, stream_type))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -751,7 +751,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, max(zo_compact_pending_jobs{namespace=\"$namespace\"})by (organization,stream_type))",
+              "query": "topk(10, max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by (organization,stream_type))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -805,7 +805,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, sum(irate(zo_compact_merged_bytes{namespace=\"$namespace\"}[1m])) by (organization, stream_type))",
+              "query": "topk(10, sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[1m])) by (organization, stream_type))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -878,7 +878,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "max(zo_meta_storage_bytes{namespace=\"$namespace\"})",
+              "query": "max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -945,7 +945,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "max(zo_meta_storage_keys{namespace=\"$namespace\"})",
+              "query": "max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1005,7 +1005,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, max(zo_storage_original_bytes{namespace=\"$namespace\"})by(organization,stream_type,stream))",
+              "query": "topk(10, max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1059,7 +1059,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(max(zo_storage_compressed_bytes{namespace=\"$namespace\", stream_type=\"metrics\"})by(organization,stream_type,stream))",
+              "query": "sum(max(owlpane_ingest_bytes_total{namespace=\"$namespace\", stream_type=\"metrics\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1082,7 +1082,7 @@
               }
             },
             {
-              "query": "topk(10, max(zo_storage_compressed_bytes{namespace=\"$namespace\"})by(organization,stream_type,stream))",
+              "query": "topk(10, max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1149,7 +1149,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, max(zo_storage_files{namespace=\"$namespace\"})by(organization,stream_type,stream))",
+              "query": "topk(10, max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1216,7 +1216,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, max(zo_storage_records{namespace=\"$namespace\"})by(organization,stream_type,stream))",
+              "query": "topk(10, max(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1271,7 +1271,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(zo_storage_read_requests{namespace=\"$namespace\"}[5m]))by(pod)",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1294,7 +1294,7 @@
               }
             },
             {
-              "query": "sum(irate(zo_storage_write_requests{namespace=\"$namespace\"}[5m]))by(pod)",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1348,7 +1348,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(zo_storage_read_bytes{namespace=\"$namespace\"}[5m]))by(pod)",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1371,7 +1371,7 @@
               }
             },
             {
-              "query": "sum(irate(zo_storage_write_bytes{namespace=\"$namespace\"}[5m]))by(pod)",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1425,7 +1425,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "topk(10, sum(irate(zo_storage_time{namespace=\"$namespace\"}[1m]))by(organization, stream_type, stream))",
+              "query": "topk(10, sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[1m]))by(organization, stream_type, stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1485,7 +1485,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(zo_ingest_bytes{namespace=\"$namespace\"}[5m]))",
+              "query": "sum(irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1508,7 +1508,7 @@
               }
             },
             {
-              "query": "topk(10, irate(zo_ingest_bytes{namespace=\"$namespace\"}[5m]))",
+              "query": "topk(10, irate(owlpane_ingest_bytes_total{namespace=\"$namespace\"}[5m]))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1563,7 +1563,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(zo_ingest_records{namespace=\"$namespace\"}[5m]))",
+              "query": "sum(irate(owlpane_ingest_batches_total{namespace=\"$namespace\"}[5m]))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1586,7 +1586,7 @@
               }
             },
             {
-              "query": "topk(10, irate(zo_ingest_records{namespace=\"$namespace\"}[5m]))",
+              "query": "topk(10, irate(owlpane_ingest_batches_total{namespace=\"$namespace\"}[5m]))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1646,7 +1646,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_query_memory_cache_limit_bytes{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1669,7 +1669,7 @@
               }
             },
             {
-              "query": "sum(zo_query_memory_cache_used_bytes{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1722,7 +1722,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_query_memory_cache_files{namespace=\"$namespace\"})",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"})",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1745,7 +1745,7 @@
               }
             },
             {
-              "query": "topk(10, sum(zo_query_memory_cache_files{namespace=\"$namespace\"})by(organization,stream_type,stream))",
+              "query": "topk(10, sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1799,7 +1799,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_query_disk_cache_limit_bytes{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1822,7 +1822,7 @@
               }
             },
             {
-              "query": "sum(zo_query_disk_cache_used_bytes{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\", pod=~\".*querier.*\"})by(pod)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1875,7 +1875,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(zo_query_disk_cache_files{namespace=\"$namespace\"})",
+              "query": "sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"})",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1898,7 +1898,7 @@
               }
             },
             {
-              "query": "topk(10, sum(zo_query_disk_cache_files{namespace=\"$namespace\"})by(organization,stream_type,stream))",
+              "query": "topk(10, sum(owlpane_ingest_bytes_total{namespace=\"$namespace\"})by(organization,stream_type,stream))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -1972,11 +1972,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(zo_http_incoming_requests{namespace=\"$namespace\"}[5m])) by (exported_endpoint)",
+              "query": "sum(irate(http_server_duration_count{namespace=\"$namespace\"}[5m])) by (exported_endpoint)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "zo_http_incoming_requests",
+                "stream": "http_server_duration_count",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -1995,11 +1995,11 @@
               }
             },
             {
-              "query": "sum(irate(zo_grpc_incoming_requests{namespace=\"$namespace\"}[5m])) by (exported_endpoint)",
+              "query": "sum(irate(rpc_server_duration_count{namespace=\"$namespace\"}[5m])) by (exported_endpoint)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "zo_http_incoming_requests",
+                "stream": "http_server_duration_count",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -2049,7 +2049,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "histogram_quantile(0.95, sum(irate(zo_http_response_time_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
+              "query": "histogram_quantile(0.95, sum(irate(http_server_duration_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -2072,7 +2072,7 @@
               }
             },
             {
-              "query": "histogram_quantile(0.99, sum(irate(zo_http_response_time_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
+              "query": "histogram_quantile(0.99, sum(irate(http_server_duration_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -2126,7 +2126,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "histogram_quantile(0.95, sum(irate(zo_grpc_response_time_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
+              "query": "histogram_quantile(0.95, sum(irate(rpc_server_duration_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -2149,7 +2149,7 @@
               }
             },
             {
-              "query": "histogram_quantile(0.99, sum(irate(zo_grpc_response_time_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
+              "query": "histogram_quantile(0.99, sum(irate(rpc_server_duration_bucket{namespace=\"$namespace\"}[5m])) by (le, exported_endpoint))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
