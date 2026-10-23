@@ -36,7 +36,7 @@
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_memory_rss",
+                "stream": "k8s.pod.memory.usage",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -193,11 +193,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "irate(k8s_pod_network_io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"receive\", k8s.namespace.name=\"$k8s_namespace\", k8s.pod.name=\"$k8s_pod\", direction=\"receive\"}[5m])",
+              "query": "irate(k8s.pod.network.io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"receive\", k8s.namespace.name=\"$k8s_namespace\", k8s.pod.name=\"$k8s_pod\", direction=\"receive\"}[5m])",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_network_io",
+                "stream": "k8s.pod.network.io",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -245,11 +245,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "irate(k8s_pod_network_io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"transmit\", k8s.namespace.name=\"$k8s_namespace\", k8s.pod.name=\"$k8s_pod\"}[5m])",
+              "query": "irate(k8s.pod.network.io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"transmit\", k8s.namespace.name=\"$k8s_namespace\", k8s.pod.name=\"$k8s_pod\"}[5m])",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_network_io",
+                "stream": "k8s.pod.network.io",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],

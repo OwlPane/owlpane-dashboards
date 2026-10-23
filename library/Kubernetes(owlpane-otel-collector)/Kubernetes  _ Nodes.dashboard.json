@@ -141,11 +141,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "irate(k8s_node_network_io{direction=\"receive\"}[5m])",
+              "query": "irate(k8s.pod.network.io{direction=\"receive\"}[5m])",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_network_io",
+                "stream": "k8s.pod.network.io",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -193,11 +193,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "irate(k8s_node_network_io{direction=\"transmit\"}[5m])",
+              "query": "irate(k8s.pod.network.io{direction=\"transmit\"}[5m])",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_network_io",
+                "stream": "k8s.pod.network.io",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -524,7 +524,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(1 - avg by (k8s_node_name) (\n  system_cpu_utilization{state=\"idle\", k8s.cluster.name=\"$k8s_cluster\"}\n))",
+              "query": "(1 - avg by (k8s_node_name) (\n  system.cpu.utilization{state=\"idle\", k8s.cluster.name=\"$k8s_cluster\"}\n))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
