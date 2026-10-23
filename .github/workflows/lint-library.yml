@@ -1,0 +1,17 @@
+name: Lint library dashboards
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Variable names (Owlpane NAME_RE)
+        run: node scripts/lint-library-dashboard-variables.mjs

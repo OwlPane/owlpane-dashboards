@@ -11,6 +11,7 @@ const libraryRoot = path.join(import.meta.dirname, "../library");
 
 const VAR_RENAME = new Map([
   ["k8s_cluster_name", "k8s_cluster"],
+  ["k8s.cluster.name", "k8s_cluster"],
   ["k8s.namespace.name", "k8s_namespace"],
   ["k8s.node.name", "k8s_node"],
   ["k8s.pod.name", "k8s_pod"],
@@ -69,7 +70,15 @@ function patchVariableNamesInText(text, renames) {
   let out = text;
   for (const [from, to] of renames) {
     const esc = from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    out = out.replace(new RegExp(`("name":\\s*")${esc}(")`, "g"), `$1${to}$2`);
+    // Variable definitions only (not query_data.filter label keys).
+    out = out.replace(
+      new RegExp(`("type":\\s*"query_values",\\s*"name":\\s*")${esc}(")`, "g"),
+      `$1${to}$2`,
+    );
+    out = out.replace(
+      new RegExp(`("type":\\s*"query_values",\\s*\\n\\s*"name":\\s*")${esc}(")`, "g"),
+      `$1${to}$2`,
+    );
   }
   return out;
 }
