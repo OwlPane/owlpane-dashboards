@@ -31,7 +31,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.deployment.available{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
+              "query": "k8s.deployment.available{k8s.cluster.name=~\"$k8s_cluster\",k8s.namespace.name=\"$k8s_namespace\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -85,7 +85,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.statefulset.current_pods{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
+              "query": "k8s.statefulset.current_pods{k8s.cluster.name=~\"$k8s_cluster\",k8s.namespace.name=\"$k8s_namespace\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -139,7 +139,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.daemonset.current_scheduled_nodes{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
+              "query": "k8s.daemonset.current_scheduled_nodes{k8s.cluster.name=~\"$k8s_cluster\",k8s.namespace.name=\"$k8s_namespace\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -193,7 +193,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.cronjob.active_jobs{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
+              "query": "k8s.cronjob.active_jobs{k8s.cluster.name=~\"$k8s_cluster\",k8s.namespace.name=\"$k8s_namespace\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -234,7 +234,7 @@
     "list": [
       {
         "type": "query_values",
-        "name": "k8s_cluster_name",
+        "name": "k8s_cluster",
         "label": "Cluster",
         "query_data": {
           "stream_type": "metrics",
@@ -253,7 +253,7 @@
       },
       {
         "type": "query_values",
-        "name": "k8s.namespace.name",
+        "name": "k8s_namespace",
         "label": "Namespace",
         "query_data": {
           "stream_type": "metrics",
@@ -264,7 +264,7 @@
             {
               "name": "k8s.cluster.name",
               "operator": "=",
-              "value": "$k8s_cluster_name_name"
+              "value": "$k8s_cluster"
             }
           ]
         },
