@@ -2,7 +2,7 @@
   "version": 5,
   "dashboardId": "7316131899154369241",
   "title": "ArgoCD Monitoring",
-  "description": "",
+  "description": "Owlpane agent kubernetesScrapes for Argo CD (argocd_* metrics). Uses health_status and sync_status labels on argocd_app_info.",
   "role": "",
   "owner": "",
   "created": "2025-04-10T16:16:59.869Z",
@@ -548,8 +548,8 @@
         },
         {
           "id": "Panel_ID239510",
-          "type": "table",
-          "title": "App Status",
+          "type": "markdown",
+          "title": "App inventory",
           "description": "",
           "config": {
             "show_legends": true,
@@ -607,68 +607,7 @@
             }
           },
           "queryType": "sql",
-          "queries": [
-            {
-              "query": "SELECT dest_namespace as \"x_axis_1\", name as \"x_axis_2\", health_status as \"x_axis_3\", sync_status as \"x_axis_4\"  FROM \"argocd_app_info\"",
-              "vrlFunctionQuery": "",
-              "customQuery": false,
-              "fields": {
-                "stream": "argocd_app_info",
-                "stream_type": "metrics",
-                "x": [
-                  {
-                    "label": "Namespace",
-                    "alias": "x_axis_1",
-                    "column": "dest_namespace",
-                    "color": null,
-                    "isDerived": false,
-                    "havingConditions": []
-                  },
-                  {
-                    "label": "App Name",
-                    "alias": "x_axis_2",
-                    "column": "name",
-                    "color": null,
-                    "isDerived": false,
-                    "havingConditions": []
-                  },
-                  {
-                    "label": "Health Status",
-                    "alias": "x_axis_3",
-                    "column": "health_status",
-                    "color": null,
-                    "isDerived": false,
-                    "havingConditions": []
-                  },
-                  {
-                    "label": "Sync Status",
-                    "alias": "x_axis_4",
-                    "column": "sync_status",
-                    "color": null,
-                    "isDerived": false,
-                    "havingConditions": []
-                  }
-                ],
-                "y": [],
-                "z": [],
-                "breakdown": [],
-                "filter": {
-                  "filterType": "group",
-                  "logicalOperator": "AND",
-                  "conditions": []
-                }
-              },
-              "config": {
-                "promql_legend": "",
-                "layer_type": "scatter",
-                "weight_fixed": 1,
-                "limit": 0,
-                "min": 0,
-                "max": 100,
-                "time_shift": []
-              }
-            }
-          ],
+          "queries": [{ "query": null, "fields": { "stream_type": "logs" } }],
           "layout": {
             "x": 24,
             "y": 4,
@@ -677,8 +616,8 @@
             "i": 6
           },
           "htmlContent": "",
-          "markdownContent": "",
-          "customChartContent": " // To know more about ECharts , \n// visit: https://echarts.apache.org/examples/en/index.html \n// Example: https://echarts.apache.org/examples/en/editor.html?c=line-simple \n// Define your ECharts 'option' here. \n// 'data' variable is available for use and contains the response data from the search result and it is an array.\noption = {  \n \n};\n  "
+          "markdownContent": "Per-app rows (namespace, name, health, sync) need OpenObserve SQL on the `argocd_app_info` **metric stream**, which Owlpane does not expose as logs SQL. Use the **Healthy / Synced / Out of sync** charts above, or **Infrastructure → Kubernetes** for workload detail. Scrape labels: `health_status`, `sync_status`, `dest_namespace`, `name`.",
+          "customChartContent": ""
         },
         {
           "id": "Panel_ID8869610",

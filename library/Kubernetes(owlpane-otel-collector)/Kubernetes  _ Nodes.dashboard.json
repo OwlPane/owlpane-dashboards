@@ -663,7 +663,7 @@
     "list": [
       {
         "type": "query_values",
-        "name": "k8s.cluster.name",
+        "name": "k8s_cluster",
         "label": "",
         "query_data": {
           "stream_type": "metrics",
