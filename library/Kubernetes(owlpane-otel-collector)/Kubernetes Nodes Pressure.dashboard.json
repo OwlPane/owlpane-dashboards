@@ -31,11 +31,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_condition_disk_pressure{k8s.cluster.name=~\"$k8s_cluster\"}",
+              "query": "k8s.node.condition_disk_pressure{k8s.cluster.name=~\"$k8s_cluster\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_condition_disk_pressure",
+                "stream": "k8s.node.condition_disk_pressure",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -85,11 +85,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_condition_memory_pressure{k8s.cluster.name=~\"$k8s_cluster\"}",
+              "query": "k8s.node.condition_memory_pressure{k8s.cluster.name=~\"$k8s_cluster\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_condition_memory_pressure",
+                "stream": "k8s.node.condition_memory_pressure",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -139,11 +139,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_condition_pid_pressure{k8s.cluster.name=~\"$k8s_cluster\"}",
+              "query": "k8s.node.condition_pid_pressure{k8s.cluster.name=~\"$k8s_cluster\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_condition_pid_pressure",
+                "stream": "k8s.node.condition_pid_pressure",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -184,7 +184,7 @@
         "label": "Cluster",
         "query_data": {
           "stream_type": "metrics",
-          "stream": "k8s_node_condition_disk_pressure",
+          "stream": "k8s.node.condition_disk_pressure",
           "field": "k8s.cluster.name",
           "max_record_size": 1000,
           "filter": []

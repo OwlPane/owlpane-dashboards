@@ -36,7 +36,7 @@
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_memory_rss",
+                "stream": "k8s.pod.memory.usage",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -190,11 +190,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(k8s_pod_network_io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"receive\", direction=\"receive\"}[5m])) by (k8s_namespace_name)",
+              "query": "sum(irate(k8s.pod.network.io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"receive\", direction=\"receive\"}[5m])) by (k8s_namespace_name)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_network_io",
+                "stream": "k8s.pod.network.io",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -242,11 +242,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum(irate(k8s_pod_network_io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"transmit\"}[5m])) by(k8s_namespace_name)",
+              "query": "sum(irate(k8s.pod.network.io{k8s.cluster.name=~\"$k8s_cluster\",direction=\"transmit\"}[5m])) by(k8s_namespace_name)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_network_io",
+                "stream": "k8s.pod.network.io",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],

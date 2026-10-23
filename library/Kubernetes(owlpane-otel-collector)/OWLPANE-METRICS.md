@@ -8,7 +8,9 @@ Dashboards in this folder target telemetry from the [Owlpane agent](https://gith
 |---------------------------|---------------------|
 | `k8s_pod_cpu_*` | `k8s.pod.cpu.time` |
 | `k8s_pod_memory_*` | `k8s.pod.memory.usage` |
-| `k8s_node_*` / `kube_node_info` | `k8s.node.*` (e.g. `k8s.node.allocatable_cpu`) |
+| `k8s_node_*` / `kube_node_info` | `k8s.node.*` (e.g. `k8s.node.allocatable_cpu`, `k8s.node.condition_*`) |
+| `k8s_pod_network_io` | `k8s.pod.network.io` |
+| `system_cpu_utilization` | `system.cpu.utilization` |
 | `k8s_deployment_available` | `k8s.deployment.available` |
 | `k8s_hpa_desired_replicas` | `k8s.hpa.desired_replicas` |
 
@@ -21,7 +23,14 @@ Dashboards in this folder target telemetry from the [Owlpane agent](https://gith
 | `k8s_node_name` | `k8s.node.name` |
 | `k8s_pod_name` | `k8s.pod.name` |
 
-Run `node scripts/normalize-owlpane-k8s-library.mjs` after editing JSON, then regenerate API starters:
+Run normalization and variable fixes after editing JSON:
+
+```bash
+node scripts/normalize-owlpane-k8s-library.mjs
+node scripts/fix-owlpane-library-variables.mjs
+```
+
+Then regenerate API starters:
 
 ```bash
 cd owlpane/api
