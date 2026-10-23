@@ -2,6 +2,8 @@
 
 Dashboards in this folder target telemetry from the [Owlpane agent](https://github.com/OwlPane/owlpane-agent) (`k8s_cluster`, `kubeletstats`, `k8s_objects`, hostmetrics, optional Argo `kubernetesScrapes`).
 
+CI enforces Tier-1 names against [`owlpane-api` `metrics-contract-tier1.ts`](../../../api/src/product/metrics-contract-tier1.ts) after starter codegen (`npm run check:starter-catalog`).
+
 ## Use these names (not kube-state-metrics Prom streams)
 
 | OpenObserve / import name | Owlpane OTel metric |
