@@ -1,6 +1,8 @@
 # Library JSON not exported as starters
 
-`scripts/build-starter-dashboards.ts` walks all `*.json` under `library/`. **70** dashboards are committed in `owlpane-api` as `STARTER_DASHBOARDS`; **3** files produce no import body today:
+`scripts/build-starter-dashboards.ts` walks all `*.json` under `library/`. Starters are committed in `owlpane-api` as `STARTER_DASHBOARDS`; files below produce no import body today:
+
+**Owlpane agent workload tier:** prefer `Owlpane/Kubernetes Namespace Pods (Owlpane).dashboard.json` and related **Owlpane/** copies over kube-prometheus workload JSON.
 
 | File | Reason |
 |------|--------|

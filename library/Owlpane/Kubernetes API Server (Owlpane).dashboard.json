@@ -1,0 +1,38 @@
+{
+  "version": 8,
+  "title": "Kubernetes API Server (Owlpane)",
+  "description": "Control-plane metrics are not emitted by the default Owlpane agent.",
+  "tabs": [
+    {
+      "tabId": "main",
+      "name": "Scope",
+      "panels": [
+        {
+          "id": "scope",
+          "type": "markdown",
+          "title": "Requires apiserver scrape",
+          "markdownContent": "**apiserver_*** and **kube-apiserver** recording rules come from **kube-prometheus** or a dedicated control-plane scrape — not from the default Owlpane agent Helm install.\n\n- **Tier A (this product):** use **Kubernetes Cluster Resources (Owlpane)** and **Clusters Overview** for agent-backed cluster health.\n- **Tier B:** install kube-prometheus (or enable apiserver metrics on your scrape config) and use dashboards under **Kubernetes (advanced / kube-prometheus)** in the library.\n\nLayout inspired by community dashboards; Owlpane agent metrics use OTel **MetricName** values documented in METRICS-CONTRACT.md.",
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": null,
+              "fields": {
+                "stream_type": "logs"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 12,
+            "i": 1
+          }
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "list": []
+  }
+}

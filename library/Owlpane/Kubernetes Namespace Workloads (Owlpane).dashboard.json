@@ -1,0 +1,96 @@
+{
+  "version": 8,
+  "title": "Kubernetes Namespace Workloads (Owlpane)",
+  "description": "Deployment and StatefulSet gauges from k8s_cluster receiver.",
+  "tabs": [
+    {
+      "tabId": "main",
+      "name": "Workloads",
+      "panels": [
+        {
+          "id": "intro",
+          "type": "markdown",
+          "title": "About",
+          "markdownContent": "Uses **k8s.deployment.*** and **k8s.statefulset.*** from the Owlpane agent. Bare pods without owners are not listed here — see Namespace Pods or Infrastructure → Kubernetes.",
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": null,
+              "fields": {
+                "stream_type": "logs"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 4,
+            "i": 1
+          }
+        },
+        {
+          "id": "deploy",
+          "type": "line",
+          "title": "Deployments available",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.deployment.available",
+              "fields": {
+                "stream": "k8s.deployment.available",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 4,
+            "w": 24,
+            "h": 8,
+            "i": 2
+          }
+        },
+        {
+          "id": "sts",
+          "type": "line",
+          "title": "StatefulSet pods",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.statefulset.current_pods",
+              "fields": {
+                "stream": "k8s.statefulset.current_pods",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 24,
+            "y": 4,
+            "w": 24,
+            "h": 8,
+            "i": 3
+          }
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "list": [
+      {
+        "type": "query_values",
+        "name": "k8s_cluster",
+        "label": "Cluster",
+        "query_data": {
+          "stream_type": "metrics",
+          "stream": "k8s.deployment.available",
+          "field": "k8s.cluster.name",
+          "max_record_size": 20,
+          "filter": []
+        },
+        "multiSelect": true
+      }
+    ]
+  }
+}

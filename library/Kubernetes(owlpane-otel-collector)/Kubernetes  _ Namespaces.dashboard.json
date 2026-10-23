@@ -12,6 +12,28 @@
       "name": "Default",
       "panels": [
         {
+          "id": "md-intro",
+          "type": "markdown",
+          "title": "About",
+          "markdownContent": "Panels use **Owlpane agent** OTel `MetricName` values (`k8s.*`, `system.*`). Set **Cluster** / **Namespace** at the top. For inventory and RBAC, open **Infrastructure → Kubernetes**. Layout inspired by community dashboards; metrics and variables are Owlpane agent. Questions: hello@owlpane.ai",
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": null,
+              "fields": {
+                "stream_type": "logs"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 4,
+            "i": "md-intro"
+          }
+        },
+        {
           "id": "Panel_ID3097710",
           "type": "area-stacked",
           "title": "Memory usage",
@@ -57,7 +79,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 0,
+            "y": 4,
             "w": 24,
             "h": 6,
             "i": 6
@@ -108,7 +130,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 0,
+            "y": 4,
             "w": 24,
             "h": 6,
             "i": 7
@@ -138,11 +160,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(\n  sum by(k8s_namespace_name)(\n    k8s_volume_capacity{k8s.cluster.name=~\"$k8s_cluster\",k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.cluster.name=~\"$k8s_cluster\",k8s_persistentvolumeclaim_name!=\"\"}\n  )\n) / (\n  sum by(k8s_namespace_name)(\n    k8s_volume_capacity{k8s.cluster.name=~\"$k8s_cluster\",k8s_persistentvolumeclaim_name!=\"\"}\n  )\n)\n",
+              "query": "(\n  sum by(k8s_namespace_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.cluster.name=~\"$k8s_cluster\",k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.cluster.name=~\"$k8s_cluster\",k8s_persistentvolumeclaim_name!=\"\"}\n  )\n) / (\n  sum by(k8s_namespace_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.cluster.name=~\"$k8s_cluster\",k8s_persistentvolumeclaim_name!=\"\"}\n  )\n)\n",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_volume_capacity",
+                "stream": "k8s.persistentvolumeclaim.storage.capacity",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -163,7 +185,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 18,
+            "y": 22,
             "w": 16,
             "h": 6,
             "i": 8
@@ -215,7 +237,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 24,
+            "y": 28,
             "w": 24,
             "h": 7,
             "i": 9
@@ -267,7 +289,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 24,
+            "y": 28,
             "w": 24,
             "h": 7,
             "i": 10
@@ -293,11 +315,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "ceil(sum by(namespace) (rate(container_fs_reads_total{k8s.cluster.name=~\"$k8s_cluster\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"}[$__rate_interval]) + rate(container_fs_writes_total{k8s.cluster.name=~\"$k8s_cluster\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",}[$__rate_interval])))",
+              "query": "ceil(sum by(namespace) (rate(system.disk.operations{k8s.cluster.name=~\"$k8s_cluster\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"}[$__rate_interval]) + rate(system.disk.operations{k8s.cluster.name=~\"$k8s_cluster\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",}[$__rate_interval])))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "container_fs_reads_total",
+                "stream": "system.disk.operations",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -318,7 +340,7 @@
           ],
           "layout": {
             "x": 16,
-            "y": 18,
+            "y": 22,
             "w": 16,
             "h": 6,
             "i": 11
@@ -345,7 +367,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by(namespace)(\n  rate(container_fs_reads_bytes_total{\n    k8s.cluster.name=~\"$k8s_cluster\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    k8s.cluster.name=~\"$k8s_cluster\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"\n  }[$__rate_interval])\n)",
+              "query": "sum by(namespace)(\n  rate(system.disk.io{\n    k8s.cluster.name=~\"$k8s_cluster\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"\n  }[$__rate_interval])\n  +\n  rate(system.disk.io{\n    k8s.cluster.name=~\"$k8s_cluster\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"\n  }[$__rate_interval])\n)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -370,7 +392,7 @@
           ],
           "layout": {
             "x": 32,
-            "y": 18,
+            "y": 22,
             "w": 16,
             "h": 6,
             "i": 12
@@ -425,7 +447,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 6,
+            "y": 10,
             "w": 24,
             "h": 6,
             "i": 13
@@ -480,7 +502,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 12,
+            "y": 16,
             "w": 24,
             "h": 6,
             "i": 14
@@ -535,7 +557,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 6,
+            "y": 10,
             "w": 24,
             "h": 6,
             "i": 15
@@ -590,7 +612,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 12,
+            "y": 16,
             "w": 24,
             "h": 6,
             "i": 16

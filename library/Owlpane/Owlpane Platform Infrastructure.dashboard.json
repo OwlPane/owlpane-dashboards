@@ -415,10 +415,10 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*querier.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*querier.*\"}\n  )\n)\n",
+              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*querier.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*querier.*\"}\n  )\n)\n",
               "customQuery": true,
               "fields": {
-                "stream": "k8s_volume_capacity",
+                "stream": "k8s.persistentvolumeclaim.storage.capacity",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -475,7 +475,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "ceil(sum by(pod) (rate(container_fs_reads_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(container_fs_writes_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*querier.*\"}[$__rate_interval])))",
+              "query": "ceil(sum by(pod) (rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*querier.*\"}[$__rate_interval])))",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -536,7 +536,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by(pod)(\n  rate(container_fs_reads_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*querier.*\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*querier.*\"\n  }[$__rate_interval])\n)",
+              "query": "sum by(pod)(\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*querier.*\"\n  }[$__rate_interval])\n  +\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*querier.*\"\n  }[$__rate_interval])\n)",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -998,10 +998,10 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*ingester.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*ingester.*\"}\n  )\n)\n",
+              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*ingester.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*ingester.*\"}\n  )\n)\n",
               "customQuery": true,
               "fields": {
-                "stream": "k8s_volume_capacity",
+                "stream": "k8s.persistentvolumeclaim.storage.capacity",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -1058,7 +1058,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "ceil(sum by(pod) (rate(container_fs_reads_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(container_fs_writes_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*ingester.*\"}[$__rate_interval])))",
+              "query": "ceil(sum by(pod) (rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*ingester.*\"}[$__rate_interval])))",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -1119,7 +1119,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by(pod)(\n  rate(container_fs_reads_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*ingester.*\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*ingester.*\"\n  }[$__rate_interval])\n)",
+              "query": "sum by(pod)(\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*ingester.*\"\n  }[$__rate_interval])\n  +\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*ingester.*\"\n  }[$__rate_interval])\n)",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -2409,10 +2409,10 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*postgres.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*postgres.*\"}\n  )\n)\n",
+              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*postgres.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*postgres.*\"}\n  )\n)\n",
               "customQuery": true,
               "fields": {
-                "stream": "k8s_volume_capacity",
+                "stream": "k8s.persistentvolumeclaim.storage.capacity",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -2469,7 +2469,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "ceil(sum by(pod) (rate(container_fs_reads_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(container_fs_writes_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*postgres.*\"}[$__rate_interval])))",
+              "query": "ceil(sum by(pod) (rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*postgres.*\"}[$__rate_interval])))",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -2530,7 +2530,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by(pod)(\n  rate(container_fs_reads_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*postgres.*\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*postgres.*\"\n  }[$__rate_interval])\n)",
+              "query": "sum by(pod)(\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*postgres.*\"\n  }[$__rate_interval])\n  +\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*postgres.*\"\n  }[$__rate_interval])\n)",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -2992,10 +2992,10 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*etcd.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*etcd.*\"}\n  )\n)\n",
+              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*etcd.*\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s.persistentvolumeclaim.storage.capacity{k8s.namespace.name=\"$k8s_namespace\", k8s_persistentvolumeclaim_name!=\"\", k8s.pod.name=~\".*etcd.*\"}\n  )\n)\n",
               "customQuery": true,
               "fields": {
-                "stream": "k8s_volume_capacity",
+                "stream": "k8s.persistentvolumeclaim.storage.capacity",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -3052,7 +3052,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "ceil(sum by(pod) (rate(container_fs_reads_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(container_fs_writes_total{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*etcd.*\"}[$__rate_interval])))",
+              "query": "ceil(sum by(pod) (rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\"}[$__rate_interval]) + rate(system.disk.operations{container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace\", pod=~\".*etcd.*\"}[$__rate_interval])))",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",
@@ -3113,7 +3113,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by(pod)(\n  rate(container_fs_reads_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*etcd.*\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*etcd.*\"\n  }[$__rate_interval])\n)",
+              "query": "sum by(pod)(\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*etcd.*\"\n  }[$__rate_interval])\n  +\n  rate(system.disk.io{\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace\", pod=~\".*etcd.*\"\n  }[$__rate_interval])\n)",
               "customQuery": true,
               "fields": {
                 "stream": "cadvisor_version_info",

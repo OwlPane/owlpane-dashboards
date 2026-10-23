@@ -12,6 +12,28 @@
       "name": "Default",
       "panels": [
         {
+          "id": "md-intro",
+          "type": "markdown",
+          "title": "About",
+          "markdownContent": "Panels use **Owlpane agent** OTel `MetricName` values (`k8s.*`, `system.*`). Set **Cluster** / **Namespace** at the top. For inventory and RBAC, open **Infrastructure → Kubernetes**. Layout inspired by community dashboards; metrics and variables are Owlpane agent. Questions: hello@owlpane.ai",
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": null,
+              "fields": {
+                "stream_type": "logs"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 4,
+            "i": "md-intro"
+          }
+        },
+        {
           "id": "Panel_ID3097710",
           "type": "area-stacked",
           "title": "Memory utilization (rss)",
@@ -57,7 +79,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 0,
+            "y": 4,
             "w": 24,
             "h": 6,
             "i": 6
@@ -111,7 +133,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 0,
+            "y": 4,
             "w": 24,
             "h": 6,
             "i": 7
@@ -166,7 +188,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 19,
+            "y": 23,
             "w": 24,
             "h": 7,
             "i": 9
@@ -218,7 +240,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 19,
+            "y": 23,
             "w": 24,
             "h": 7,
             "i": 10
@@ -288,7 +310,7 @@
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "container_cpu_time",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -311,7 +333,7 @@
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "container_cpu_time",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -332,7 +354,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 13,
+            "y": 17,
             "w": 24,
             "h": 6,
             "i": 11
@@ -406,7 +428,7 @@
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "container_cpu_time",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -429,7 +451,7 @@
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "container_cpu_time",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -450,7 +472,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 13,
+            "y": 17,
             "w": 24,
             "h": 6,
             "i": 12
@@ -528,7 +550,7 @@
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "container_cpu_time",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -552,7 +574,7 @@
           ],
           "layout": {
             "x": 0,
-            "y": 6,
+            "y": 10,
             "w": 24,
             "h": 7,
             "i": 13
@@ -626,7 +648,7 @@
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "container_cpu_time",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -647,7 +669,7 @@
           ],
           "layout": {
             "x": 24,
-            "y": 6,
+            "y": 10,
             "w": 24,
             "h": 7,
             "i": 14

@@ -1,0 +1,134 @@
+{
+  "version": 8,
+  "title": "Kubernetes Namespace Pods (Owlpane)",
+  "description": "Pod CPU, memory, and network from Owlpane agent kubeletstats.",
+  "tabs": [
+    {
+      "tabId": "main",
+      "name": "Pods",
+      "panels": [
+        {
+          "id": "intro",
+          "type": "markdown",
+          "title": "About",
+          "markdownContent": "Charts use **Owlpane agent** OTel names (`k8s.pod.*`). Layout inspired by community dashboards; metrics and variables are Owlpane agent. For pod inventory open **Infrastructure → Kubernetes → Workloads**.",
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": null,
+              "fields": {
+                "stream_type": "logs"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 4,
+            "i": 1
+          }
+        },
+        {
+          "id": "cpu",
+          "type": "line",
+          "title": "Pod CPU",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.pod.cpu.time",
+              "fields": {
+                "stream": "k8s.pod.cpu.time",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 4,
+            "w": 16,
+            "h": 8,
+            "i": 2
+          }
+        },
+        {
+          "id": "mem",
+          "type": "line",
+          "title": "Pod memory",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.pod.memory.usage",
+              "fields": {
+                "stream": "k8s.pod.memory.usage",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 4,
+            "w": 16,
+            "h": 8,
+            "i": 3
+          }
+        },
+        {
+          "id": "net",
+          "type": "line",
+          "title": "Pod network I/O",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.pod.network.io",
+              "fields": {
+                "stream": "k8s.pod.network.io",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 32,
+            "y": 4,
+            "w": 16,
+            "h": 8,
+            "i": 4
+          }
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "list": [
+      {
+        "type": "query_values",
+        "name": "k8s_cluster",
+        "label": "Cluster",
+        "query_data": {
+          "stream_type": "metrics",
+          "stream": "k8s.node.allocatable_cpu",
+          "field": "k8s.cluster.name",
+          "max_record_size": 20,
+          "filter": []
+        },
+        "multiSelect": true
+      },
+      {
+        "type": "query_values",
+        "name": "k8s_namespace",
+        "label": "Namespace",
+        "query_data": {
+          "stream_type": "metrics",
+          "stream": "k8s.pod.cpu.time",
+          "field": "k8s.namespace.name",
+          "max_record_size": 50,
+          "filter": []
+        },
+        "dependsOn": [
+          "k8s_cluster"
+        ],
+        "multiSelect": false
+      }
+    ]
+  }
+}
