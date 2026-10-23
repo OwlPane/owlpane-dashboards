@@ -9,7 +9,8 @@ Charts for **ingestion, agent, and SDK** telemetry in a tenant workspace (not Op
 
 ![Owlpane Internals](./screenshots/internals.png)
 
-**Dogfood:** `sdk/examples/scripts/emit-dashboard-library-metrics.mjs`  
+**Dogfood:** `sdk/examples/scripts/emit-dashboard-library-metrics.mjs` (lane A — platform ingest + API OTLP on Hetzner)  
+**Scale QA:** [metrics-contract-tier1.md](../../../api/docs/ops/metrics-contract-tier1.md) + [scale-org-dashboard-library-qa.md](../../../api/docs/ops/scale-org-dashboard-library-qa.md)  
 **Operators (cell ClickHouse):** [CHouse UI](https://github.com/daun-gatal/chouse-ui) — see `stumpcam/deploy/docs/chouse-ui-local.md`
 
 
