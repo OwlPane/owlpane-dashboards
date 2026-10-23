@@ -31,11 +31,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_deployment_available{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.deployment.available{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_deployment_available",
+                "stream": "k8s.deployment.available",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -85,11 +85,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_statefulset_current_pods{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.statefulset.current_pods{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_statefulset_current_pods",
+                "stream": "k8s.statefulset.current_pods",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -139,11 +139,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_daemonset_current_scheduled_nodes{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.daemonset.current_scheduled_nodes{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_daemonset_current_scheduled_nodes",
+                "stream": "k8s.daemonset.current_scheduled_nodes",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -193,11 +193,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_cronjob_active_jobs{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.cronjob.active_jobs{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_cronjob_active_jobs",
+                "stream": "k8s.cronjob.active_jobs",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -238,8 +238,8 @@
         "label": "Cluster",
         "query_data": {
           "stream_type": "metrics",
-          "stream": "k8s_pod_cpu_usage",
-          "field": "k8s_cluster",
+          "stream": "k8s.pod.cpu.time",
+          "field": "k8s.cluster.name",
           "max_record_size": 1000,
           "filter": []
         },
@@ -253,18 +253,18 @@
       },
       {
         "type": "query_values",
-        "name": "k8s_namespace_name",
+        "name": "k8s.namespace.name",
         "label": "Namespace",
         "query_data": {
           "stream_type": "metrics",
-          "stream": "k8s_pod_cpu_usage",
-          "field": "k8s_namespace_name",
+          "stream": "k8s.pod.cpu.time",
+          "field": "k8s.namespace.name",
           "max_record_size": 100,
           "filter": [
             {
-              "name": "k8s_cluster",
+              "name": "k8s.cluster.name",
               "operator": "=",
-              "value": "$k8s_cluster_name"
+              "value": "$k8s_cluster_name_name"
             }
           ]
         },

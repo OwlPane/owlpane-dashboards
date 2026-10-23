@@ -32,7 +32,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_pod_memory_usage{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.pod.memory.usage{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -83,11 +83,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_pod_cpu_usage{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.pod.cpu.time{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_cpu_usage",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -138,7 +138,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\", k8s_persistentvolumeclaim_name!=\"\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\", k8s_persistentvolumeclaim_name!=\"\"}\n  )\n)\n",
+              "query": "(\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\", k8s_persistentvolumeclaim_name!=\"\"}\n    - k8s_volume_available{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\", k8s_persistentvolumeclaim_name!=\"\"}\n  )\n) / (\n  sum by(k8s_persistentvolumeclaim_name)(\n    k8s_volume_capacity{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\", k8s_persistentvolumeclaim_name!=\"\"}\n  )\n)\n",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -190,7 +190,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "irate(k8s_pod_network_io{k8s_cluster=~\"$k8s_cluster_name\",direction=\"receive\", k8s_namespace_name=\"$k8s_namespace_name\", direction=\"receive\"}[5m])",
+              "query": "irate(k8s_pod_network_io{k8s.cluster.name=~\"$k8s_cluster_name_name\",direction=\"receive\", k8s.namespace.name=\"$k8s_namespace_name\", direction=\"receive\"}[5m])",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -242,7 +242,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "irate(k8s_pod_network_io{k8s_cluster=~\"$k8s_cluster_name\",direction=\"transmit\", k8s_namespace_name=\"$k8s_namespace_name\"}[5m])",
+              "query": "irate(k8s_pod_network_io{k8s.cluster.name=~\"$k8s_cluster_name_name\",direction=\"transmit\", k8s.namespace.name=\"$k8s_namespace_name\"}[5m])",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -293,7 +293,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "ceil(sum by(pod) (rate(container_fs_reads_total{k8s_cluster=~\"$k8s_cluster_name\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace_name\"}[$__rate_interval]) + rate(container_fs_writes_total{k8s_cluster=~\"$k8s_cluster_name\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace_name\"}[$__rate_interval])))",
+              "query": "ceil(sum by(pod) (rate(container_fs_reads_total{k8s.cluster.name=~\"$k8s_cluster_name_name\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace_name\"}[$__rate_interval]) + rate(container_fs_writes_total{k8s.cluster.name=~\"$k8s_cluster_name_name\",container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", namespace=\"$k8s_namespace_name\"}[$__rate_interval])))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -345,7 +345,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by(pod)(\n  rate(container_fs_reads_bytes_total{\n    k8s_cluster=~\"$k8s_cluster_name\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace_name\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    k8s_cluster=~\"$k8s_cluster_name\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace_name\"\n  }[$__rate_interval])\n)",
+              "query": "sum by(pod)(\n  rate(container_fs_reads_bytes_total{\n    k8s.cluster.name=~\"$k8s_cluster_name_name\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace_name\"\n  }[$__rate_interval])\n  +\n  rate(container_fs_writes_bytes_total{\n    k8s.cluster.name=~\"$k8s_cluster_name_name\",\n    container!= \"\",\n    device=~\"(/dev/)?(mmcblk[0-9]p[0-9]+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\",\n    namespace=\"$k8s_namespace_name\"\n  }[$__rate_interval])\n)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -397,11 +397,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_pod_cpu_limit_utilization{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.pod.cpu.time{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_cpu_limit_utilization",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -452,11 +452,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_pod_cpu_request_utilization{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.pod.cpu.time{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_cpu_request_utilization",
+                "stream": "k8s.pod.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -507,11 +507,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_pod_memory_request_utilization{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.pod.memory.usage{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_memory_request_utilization",
+                "stream": "k8s.pod.memory.usage",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -562,11 +562,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_pod_memory_limit_utilization{k8s_cluster=~\"$k8s_cluster_name\",k8s_namespace_name=\"$k8s_namespace_name\"}",
+              "query": "k8s.pod.memory.usage{k8s.cluster.name=~\"$k8s_cluster_name_name\",k8s.namespace.name=\"$k8s_namespace_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_pod_memory_limit_utilization",
+                "stream": "k8s.pod.memory.usage",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -607,8 +607,8 @@
         "label": "Cluster",
         "query_data": {
           "stream_type": "metrics",
-          "stream": "k8s_pod_cpu_usage",
-          "field": "k8s_cluster",
+          "stream": "k8s.pod.cpu.time",
+          "field": "k8s.cluster.name",
           "max_record_size": 1000,
           "filter": []
         },
@@ -622,18 +622,18 @@
       },
       {
         "type": "query_values",
-        "name": "k8s_namespace_name",
+        "name": "k8s.namespace.name",
         "label": "Namespace",
         "query_data": {
           "stream_type": "metrics",
-          "stream": "k8s_pod_cpu_usage",
-          "field": "k8s_namespace_name",
+          "stream": "k8s.pod.cpu.time",
+          "field": "k8s.namespace.name",
           "max_record_size": 100,
           "filter": [
             {
-              "name": "k8s_cluster",
+              "name": "k8s.cluster.name",
               "operator": "=",
-              "value": "$k8s_cluster_name"
+              "value": "$k8s_cluster_name_name"
             }
           ]
         },

@@ -32,11 +32,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_memory_rss{k8s_cluster='$k8s_cluster'}",
+              "query": "k8s.node.memory.usage{k8s.cluster.name='$k8s_cluster_name'}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_memory_rss",
+                "stream": "k8s.node.memory.usage",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -86,11 +86,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_cpu_usage{k8s_cluster='$k8s_cluster'}",
+              "query": "k8s.node.cpu.time{k8s.cluster.name='$k8s_cluster_name'}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s_node_cpu_usage",
+                "stream": "k8s.node.cpu.time",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
@@ -284,7 +284,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by (k8s_node_name) (\n  rate(system_disk_operations{direction=\"read\"}[1m])\n)",
+              "query": "sum by (k8s_node_name) (\n  rate(system.disk.operations{direction=\"read\"}[1m])\n)",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -307,7 +307,7 @@
               }
             },
             {
-              "query": "sum by (k8s_node_name) (\n  rate(system_disk_operations{direction=\"write\"}[1m])\n)",
+              "query": "sum by (k8s_node_name) (\n  rate(system.disk.operations{direction=\"write\"}[1m])\n)",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
@@ -402,7 +402,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "sum by (k8s_node_name, device) (rate(system_disk_io{direction=\"read\"}[1m]))",
+              "query": "sum by (k8s_node_name, device) (rate(system.disk.io{direction=\"read\"}[1m]))",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
@@ -425,7 +425,7 @@
               }
             },
             {
-              "query": "sum by (k8s_node_name, device) (rate(system_disk_io{direction=\"write\"}[1m]))",
+              "query": "sum by (k8s_node_name, device) (rate(system.disk.io{direction=\"write\"}[1m]))",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
@@ -524,7 +524,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(1 - avg by (k8s_node_name) (\n  system_cpu_utilization{state=\"idle\", k8s_cluster=\"$k8s_cluster\"}\n))",
+              "query": "(1 - avg by (k8s_node_name) (\n  system_cpu_utilization{state=\"idle\", k8s.cluster.name=\"$k8s_cluster_name\"}\n))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -622,7 +622,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "system_memory_utilization{state=\"used\", k8s_cluster=\"$k8s_cluster\"}",
+              "query": "system.memory.utilization{state=\"used\", k8s.cluster.name=\"$k8s_cluster_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -663,12 +663,12 @@
     "list": [
       {
         "type": "query_values",
-        "name": "k8s_cluster",
+        "name": "k8s.cluster.name",
         "label": "",
         "query_data": {
           "stream_type": "metrics",
-          "stream": "k8s_node_cpu_usage",
-          "field": "k8s_cluster",
+          "stream": "k8s.node.cpu.time",
+          "field": "k8s.cluster.name",
           "max_record_size": null,
           "filter": []
         },

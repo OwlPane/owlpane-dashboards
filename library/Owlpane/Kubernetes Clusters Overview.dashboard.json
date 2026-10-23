@@ -1,0 +1,148 @@
+{
+  "version": 8,
+  "title": "Kubernetes Clusters Overview",
+  "description": "Owlpane agent metrics (k8s_cluster receiver, hostmetrics, k8s object logs). Not kube-state-metrics Prom names.",
+  "tabs": [
+    {
+      "tabId": "overview",
+      "name": "Overview",
+      "panels": [
+        {
+          "id": "md-intro",
+          "type": "markdown",
+          "title": "About",
+          "markdownContent": "Counts and charts use **Owlpane agent** OTel names (`k8s.node.*`, `k8s.deployment.*`, `kubernetes-cluster` logs). For full inventory (nodes, workloads, RBAC) open **Infrastructure → Kubernetes**.",
+          "queryType": "sql",
+          "queries": [{ "query": null, "fields": { "stream_type": "logs" } }],
+          "layout": { "x": 0, "y": 0, "w": 48, "h": 4, "i": 1 }
+        },
+        {
+          "id": "nodes-gauge",
+          "type": "metric",
+          "title": "Nodes (ready)",
+          "queryType": "promql",
+          "queries": [{
+            "query": "count by (k8s_cluster) (k8s.node.condition_ready{k8s.cluster.name=~\"$k8s_cluster\"})",
+            "customQuery": true,
+            "fields": { "stream": "k8s.node.condition_ready", "stream_type": "metrics" }
+          }],
+          "layout": { "x": 0, "y": 4, "w": 12, "h": 8, "i": 2 }
+        },
+        {
+          "id": "deploy-gauge",
+          "type": "metric",
+          "title": "Deployments (available)",
+          "queryType": "promql",
+          "queries": [{
+            "query": "sum by (k8s_cluster) (k8s.deployment.available{k8s.cluster.name=~\"$k8s_cluster\"})",
+            "customQuery": true,
+            "fields": { "stream": "k8s.deployment.available", "stream_type": "metrics" }
+          }],
+          "layout": { "x": 12, "y": 4, "w": 12, "h": 8, "i": 3 }
+        },
+        {
+          "id": "crd-scalar",
+          "type": "metric",
+          "title": "CRDs",
+          "queryType": "sql",
+          "queries": [{
+            "query": "SELECT COUNT(DISTINCT body_metadata_name) AS crd_count FROM k8s_events WHERE body_kind = 'CustomResourceDefinition' AND k8s_cluster IN (${k8s_cluster})",
+            "customQuery": true,
+            "fields": { "stream": "k8s_events", "stream_type": "logs" }
+          }],
+          "layout": { "x": 24, "y": 4, "w": 12, "h": 8, "i": 4 }
+        },
+        {
+          "id": "events-hist",
+          "type": "line",
+          "title": "Events Per Cluster",
+          "queryType": "sql",
+          "queries": [{
+            "query": "SELECT histogram(_timestamp) AS x_axis_1, count(*) AS y_axis_1, k8s_cluster AS breakdown_1 FROM k8s_events WHERE k8s_cluster IN (${k8s_cluster}) AND body_object_kind = 'Event' GROUP BY x_axis_1, breakdown_1 ORDER BY x_axis_1 ASC",
+            "customQuery": true,
+            "fields": { "stream": "k8s_events", "stream_type": "logs" }
+          }],
+          "layout": { "x": 0, "y": 12, "w": 24, "h": 10, "i": 5 }
+        },
+        {
+          "id": "events-table",
+          "type": "table",
+          "title": "Events",
+          "queryType": "sql",
+          "queries": [{
+            "query": "SELECT _timestamp, k8s_cluster AS cluster, coalesce(k8s_namespace_name, 'default') AS namespace, body_object_type AS type, body_object_reason AS reason, body_object_note AS message FROM k8s_events WHERE k8s_cluster IN (${k8s_cluster}) AND body_object_kind = 'Event' ORDER BY _timestamp DESC LIMIT 100",
+            "customQuery": true,
+            "fields": { "stream": "k8s_events", "stream_type": "logs" }
+          }],
+          "layout": { "x": 0, "y": 22, "w": 48, "h": 14, "i": 6 }
+        }
+      ]
+    },
+    {
+      "tabId": "access",
+      "name": "Access Control",
+      "panels": [
+        {
+          "id": "rbac-md",
+          "type": "markdown",
+          "title": "RBAC",
+          "markdownContent": "Service accounts, roles, and bindings are available under **Infrastructure → Kubernetes → Security** (fed by the cluster collector `k8s_objects` stream). OpenObserve-style join SQL is not used in this library dashboard.",
+          "queryType": "sql",
+          "queries": [{ "query": null, "fields": { "stream_type": "logs" } }],
+          "layout": { "x": 0, "y": 0, "w": 48, "h": 8, "i": 1 }
+        }
+      ]
+    },
+    {
+      "tabId": "crd",
+      "name": "Custom Resources",
+      "panels": [
+        {
+          "id": "crd-md",
+          "type": "markdown",
+          "title": "CRD list",
+          "markdownContent": "Browse CRDs and CR instances from **Infrastructure → Kubernetes → Custom resources**, or query `k8s_events` logs with `body_kind = 'CustomResourceDefinition'` in Logs SQL.",
+          "queryType": "sql",
+          "queries": [{ "query": null, "fields": { "stream_type": "logs" } }],
+          "layout": { "x": 0, "y": 0, "w": 48, "h": 6, "i": 1 }
+        }
+      ]
+    },
+    {
+      "tabId": "extra",
+      "name": "Extra",
+      "panels": [
+        {
+          "id": "hpa-metric",
+          "type": "line",
+          "title": "HPA desired replicas",
+          "queryType": "promql",
+          "queries": [{
+            "query": "k8s.hpa.desired_replicas{k8s.cluster.name=~\"$k8s_cluster\"}",
+            "customQuery": true,
+            "fields": { "stream": "k8s.hpa.desired_replicas", "stream_type": "metrics" }
+          }],
+          "layout": { "x": 0, "y": 0, "w": 48, "h": 10, "i": 1 }
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "list": [
+      {
+        "type": "query_values",
+        "name": "k8s_cluster",
+        "label": "k8s_cluster",
+        "query_data": {
+          "stream_type": "metrics",
+          "stream": "k8s.node.allocatable_cpu",
+          "field": "k8s.cluster.name",
+          "max_record_size": 20,
+          "filter": []
+        },
+        "multiSelect": true,
+        "hideOnDashboard": false
+      }
+    ]
+  }
+}

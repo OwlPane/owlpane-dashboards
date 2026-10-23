@@ -31,7 +31,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_condition_disk_pressure{k8s_cluster=~\"$k8s_cluster_name\"}",
+              "query": "k8s_node_condition_disk_pressure{k8s.cluster.name=~\"$k8s_cluster_name_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -85,7 +85,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_condition_memory_pressure{k8s_cluster=~\"$k8s_cluster_name\"}",
+              "query": "k8s_node_condition_memory_pressure{k8s.cluster.name=~\"$k8s_cluster_name_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -139,7 +139,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s_node_condition_pid_pressure{k8s_cluster=~\"$k8s_cluster_name\"}",
+              "query": "k8s_node_condition_pid_pressure{k8s.cluster.name=~\"$k8s_cluster_name_name\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -185,7 +185,7 @@
         "query_data": {
           "stream_type": "metrics",
           "stream": "k8s_node_condition_disk_pressure",
-          "field": "k8s_cluster",
+          "field": "k8s.cluster.name",
           "max_record_size": 1000,
           "filter": []
         },

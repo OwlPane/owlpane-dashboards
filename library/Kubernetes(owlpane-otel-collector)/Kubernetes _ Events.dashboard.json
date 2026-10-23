@@ -31,7 +31,7 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT severity as \"x_axis_1\", count(_timestamp) as \"y_axis_1\"  FROM \"k8s_events\"  GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "query": "SELECT severity as \"x_axis_1\", count(*) as \"y_axis_1\"  FROM \"k8s_events\"  GROUP BY x_axis_1 ORDER BY x_axis_1",
               "vrlFunctionQuery": null,
               "customQuery": false,
               "fields": {
@@ -107,7 +107,7 @@
                   {
                     "label": " ",
                     "alias": "x_axis_1",
-                    "column": "k8s_namespace_name",
+                    "column": "k8s.namespace.name",
                     "color": null
                   }
                 ],
@@ -170,7 +170,7 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT body_object_reason as \"x_axis_1\", count(_timestamp) as \"y_axis_1\", k8s_namespace_name as \"breakdown_1\"  FROM \"k8s_events\"  GROUP BY x_axis_1, breakdown_1",
+              "query": "SELECT body_object_reason as \"x_axis_1\", count(*) as \"y_axis_1\", k8s_namespace_name as \"breakdown_1\"  FROM \"k8s_events\"  GROUP BY x_axis_1, breakdown_1",
               "vrlFunctionQuery": null,
               "customQuery": false,
               "fields": {
@@ -202,7 +202,7 @@
                   {
                     "label": "K8s Namespace Name",
                     "alias": "breakdown_1",
-                    "column": "k8s_namespace_name",
+                    "column": "k8s.namespace.name",
                     "color": null
                   }
                 ],
@@ -296,7 +296,7 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT histogram(_timestamp) as \"x_axis_1\", k8s_namespace_name as \"x_axis_2\", severity as \"x_axis_3\", body_object_reason as \"x_axis_4\", count(_timestamp) as \"y_axis_1\"  FROM \"k8s_events\"  GROUP BY x_axis_1, x_axis_2, x_axis_3, x_axis_4 ORDER BY x_axis_1 ASC",
+              "query": "SELECT histogram(_timestamp) as \"x_axis_1\", k8s_namespace_name as \"x_axis_2\", severity as \"x_axis_3\", body_object_reason as \"x_axis_4\", count(*) as \"y_axis_1\"  FROM \"k8s_events\"  GROUP BY x_axis_1, x_axis_2, x_axis_3, x_axis_4 ORDER BY x_axis_1 ASC",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
@@ -317,7 +317,7 @@
                   {
                     "label": "K8s Namespace Name",
                     "alias": "x_axis_2",
-                    "column": "k8s_namespace_name",
+                    "column": "k8s.namespace.name",
                     "color": null,
                     "isDerived": false,
                     "havingConditions": [],
