@@ -43,6 +43,14 @@ const METRIC = [
   ["system_memory_utilization", "system.memory.utilization"],
   ["system_disk_operations", "system.disk.operations"],
   ["system_disk_io", "system.disk.io"],
+  ["container_cpu_time", "k8s.pod.cpu.time"],
+  ["container_memory_working_set_bytes", "k8s.pod.memory.usage"],
+  ["container_memory_rss", "k8s.pod.memory.usage"],
+  ["k8s_volume_capacity", "k8s.persistentvolumeclaim.storage.capacity"],
+  ["container_fs_reads_total", "system.disk.operations"],
+  ["container_fs_reads_bytes_total", "system.disk.io"],
+  ["container_fs_writes_total", "system.disk.operations"],
+  ["container_fs_writes_bytes_total", "system.disk.io"],
 ].sort((a, b) => b[0].length - a[0].length);
 
 /** PromQL / stream label keys only — never rewrite variables.list[].name (use fix-owlpane-library-variables.mjs). */
@@ -85,10 +93,36 @@ function targets() {
   return out;
 }
 
+const INTRO_MD =
+  "Panels use **Owlpane agent** OTel `MetricName` values (`k8s.*`, `system.*`). Set **Cluster** / **Namespace** at the top. For inventory and RBAC, open **Infrastructure → Kubernetes**. Layout inspired by community dashboards; metrics and variables are Owlpane agent. Questions: hello@owlpane.ai";
+
+function ensureAgentIntroPanel(doc, filePath) {
+  if (!filePath.includes("Kubernetes(owlpane-otel-collector)")) return doc;
+  const tab = doc.tabs?.[0];
+  if (!tab?.panels?.length) return doc;
+  if (tab.panels.some((p) => p.id === "md-intro" || p.id === "intro")) return doc;
+  const intro = {
+    id: "md-intro",
+    type: "markdown",
+    title: "About",
+    markdownContent: INTRO_MD,
+    queryType: "sql",
+    queries: [{ query: null, fields: { stream_type: "logs" } }],
+    layout: { x: 0, y: 0, w: 48, h: 4, i: "md-intro" },
+  };
+  for (const p of tab.panels) {
+    if (p.layout?.y != null) p.layout.y += 4;
+  }
+  tab.panels.unshift(intro);
+  return doc;
+}
+
 let changed = 0;
 for (const p of targets()) {
   const before = fs.readFileSync(p, "utf8");
-  const next = rewrite(before);
+  let doc = JSON.parse(before);
+  doc = ensureAgentIntroPanel(doc, p);
+  let next = rewrite(JSON.stringify(doc, null, 2));
   if (next !== before) {
     if (!dryRun) fs.writeFileSync(p, next);
     changed++;

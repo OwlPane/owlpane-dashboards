@@ -1,0 +1,118 @@
+{
+  "version": 8,
+  "title": "Kubernetes Cluster Resources (Owlpane)",
+  "description": "Node CPU, memory, and allocatable capacity from Owlpane agent.",
+  "tabs": [
+    {
+      "tabId": "main",
+      "name": "Nodes",
+      "panels": [
+        {
+          "id": "intro",
+          "type": "markdown",
+          "title": "About",
+          "markdownContent": "Node-level **k8s.node.*** and **system.*** from kubeletstats and hostmetrics. For per-node inventory use **Infrastructure → Kubernetes → Nodes**.",
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": null,
+              "fields": {
+                "stream_type": "logs"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 4,
+            "i": 1
+          }
+        },
+        {
+          "id": "ncpu",
+          "type": "line",
+          "title": "Node CPU",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.node.cpu.time",
+              "fields": {
+                "stream": "k8s.node.cpu.time",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 4,
+            "w": 16,
+            "h": 8,
+            "i": 2
+          }
+        },
+        {
+          "id": "nmem",
+          "type": "line",
+          "title": "Node memory",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.node.memory.usage",
+              "fields": {
+                "stream": "k8s.node.memory.usage",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 4,
+            "w": 16,
+            "h": 8,
+            "i": 3
+          }
+        },
+        {
+          "id": "alloc",
+          "type": "line",
+          "title": "Allocatable CPU",
+          "queryType": "promql",
+          "queries": [
+            {
+              "query": "k8s.node.allocatable_cpu",
+              "fields": {
+                "stream": "k8s.node.allocatable_cpu",
+                "stream_type": "metrics"
+              }
+            }
+          ],
+          "layout": {
+            "x": 32,
+            "y": 4,
+            "w": 16,
+            "h": 8,
+            "i": 4
+          }
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "list": [
+      {
+        "type": "query_values",
+        "name": "k8s_cluster",
+        "label": "Cluster",
+        "query_data": {
+          "stream_type": "metrics",
+          "stream": "k8s.node.allocatable_cpu",
+          "field": "k8s.cluster.name",
+          "max_record_size": 20,
+          "filter": []
+        },
+        "multiSelect": true
+      }
+    ]
+  }
+}
