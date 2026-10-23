@@ -32,7 +32,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.node.memory.usage{k8s.cluster.name='$k8s_cluster_name'}",
+              "query": "k8s.node.memory.usage{k8s.cluster.name='$k8s_cluster'}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -86,7 +86,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.node.cpu.time{k8s.cluster.name='$k8s_cluster_name'}",
+              "query": "k8s.node.cpu.time{k8s.cluster.name='$k8s_cluster'}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -524,7 +524,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "(1 - avg by (k8s_node_name) (\n  system_cpu_utilization{state=\"idle\", k8s.cluster.name=\"$k8s_cluster_name\"}\n))",
+              "query": "(1 - avg by (k8s_node_name) (\n  system_cpu_utilization{state=\"idle\", k8s.cluster.name=\"$k8s_cluster\"}\n))",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
@@ -622,7 +622,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "system.memory.utilization{state=\"used\", k8s.cluster.name=\"$k8s_cluster_name\"}",
+              "query": "system.memory.utilization{state=\"used\", k8s.cluster.name=\"$k8s_cluster\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
