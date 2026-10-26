@@ -15,7 +15,7 @@
           "id": "md-intro",
           "type": "markdown",
           "title": "About",
-          "markdownContent": "Panels use **Owlpane agent** OTel `MetricName` values (`k8s.*`, `system.*`). Set **Cluster** / **Namespace** at the top. For inventory and RBAC, open **Infrastructure → Kubernetes**. Layout inspired by community dashboards; metrics and variables are Owlpane agent. Questions: hello@owlpane.ai",
+          "markdownContent": "Event panels use **Logs SQL** on the virtual `k8s_events` stream (kubernetes-cluster agent logs). For live inventory and RBAC, open **Infrastructure → Kubernetes**. Questions: hello@owlpane.ai",
           "queryType": "sql",
           "queries": [
             {

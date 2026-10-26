@@ -38,7 +38,7 @@ const METRIC = [
   ["k8s_cronjob_active_jobs", "k8s.cronjob.active_jobs"],
   ["k8s_daemonset_current_scheduled_nodes", "k8s.daemonset.current_scheduled_nodes"],
   ["k8s_deployment_available", "k8s.deployment.available"],
-  ["k8s_statefulset_current_pods", "k8s.statefulset.current_pods"],
+  ["k8s_statefulset_current_pods", "k8s.statefulset.ready_pods"],
   ["system_cpu_utilization", "system.cpu.utilization"],
   ["system_memory_utilization", "system.memory.utilization"],
   ["system_disk_operations", "system.disk.operations"],

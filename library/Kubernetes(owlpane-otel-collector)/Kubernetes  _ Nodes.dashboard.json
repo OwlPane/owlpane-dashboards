@@ -644,7 +644,7 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "system.memory.utilization{state=\"used\", k8s.cluster.name=\"$k8s_cluster\"}",
+              "query": "system.memory.usage{state=\"used\", k8s.cluster.name=\"$k8s_cluster\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {

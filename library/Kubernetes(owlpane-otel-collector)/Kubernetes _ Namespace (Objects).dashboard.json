@@ -107,11 +107,11 @@
           "queryType": "promql",
           "queries": [
             {
-              "query": "k8s.statefulset.current_pods{k8s.cluster.name=~\"$k8s_cluster\",k8s.namespace.name=\"$k8s_namespace\"}",
+              "query": "k8s.statefulset.ready_pods{k8s.cluster.name=~\"$k8s_cluster\",k8s.namespace.name=\"$k8s_namespace\"}",
               "vrlFunctionQuery": null,
               "customQuery": true,
               "fields": {
-                "stream": "k8s.statefulset.current_pods",
+                "stream": "k8s.statefulset.ready_pods",
                 "stream_type": "metrics",
                 "x": [],
                 "y": [],
