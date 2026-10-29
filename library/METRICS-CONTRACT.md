@@ -2,7 +2,7 @@
 
 | Layer | OpenObserve habit | Owlpane production |
 |--------|-------------------|---------------------|
-| Series identity | `fields.stream` per panel (e.g. `k8s_pod_cpu_usage`) | **`MetricName`** in ClickHouse (`k8s.pod.cpu.time`) |
+| Series identity | `fields.stream` per panel (e.g. `k8s_pod_cpu_usage`) | **`MetricName`** in telemetry lake (`k8s.pod.cpu.time`) |
 | K8s pack folder | `Kubernetes(openobserve-collector)` | `Kubernetes(owlpane-otel-collector)` + **`Owlpane/`** tier |
 | Events | `k8s_events` logs stream | Virtual SQL table over `ServiceName = 'kubernetes-cluster'` |
 | Variables | Dotted names (`k8s.namespace.name`) | Import-safe **`k8s_cluster`**, **`k8s_namespace`**, … |
