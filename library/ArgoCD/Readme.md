@@ -12,7 +12,7 @@ Configured in `seo-infra/helm-charts/owlpane-agent-hetzner` via `integrations.ku
 | `argocd_redis_request_total` | Counter; rate by `initiator` |
 | `argocd_app_k8s_request_total` | Counter; rate by `resource_kind` |
 
-Dogfood emit (local): `cd owlpane/sdk/examples && node scripts/emit-dashboard-library-metrics.mjs --category ArgoCD`
+Dogfood emit (local): `cd owlpane/owlpane-sdk-examples && node scripts/emit-dashboard-library-metrics.mjs --category ArgoCD`
 
 ## Maintenance
 

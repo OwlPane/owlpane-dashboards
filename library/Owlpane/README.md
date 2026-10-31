@@ -29,6 +29,6 @@ Community **Kubernetes (Owlpane agent)** pack lives under `library/Kubernetes(ow
 
 Metric naming: [METRICS-CONTRACT.md](../METRICS-CONTRACT.md) · Tier-1 QA: [metrics-contract-tier1.md](../../../api/docs/ops/metrics-contract-tier1.md)
 
-**Dogfood:** `sdk/examples/scripts/emit-dashboard-library-metrics.mjs --from-catalog --tier1`  
+**Dogfood:** `owlpane-sdk-examples/scripts/emit-dashboard-library-metrics.mjs --from-catalog --tier1`  
 **Scale QA:** [scale-org-dashboard-library-qa.md](../../../api/docs/ops/scale-org-dashboard-library-qa.md)  
 **Operators (cell telemetry lake):** [CHouse UI](https://github.com/daun-gatal/chouse-ui) — see `stumpcam/deploy/docs/chouse-ui-local.md`
