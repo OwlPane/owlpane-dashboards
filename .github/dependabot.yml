@@ -1,0 +1,11 @@
+# Dependency update PRs. Security updates are separate and enabled in repository settings.
+version: 2
+updates:
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: weekly
+  groups:
+    actions:
+      patterns:
+      - '*'
