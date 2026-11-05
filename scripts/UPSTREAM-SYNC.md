@@ -12,7 +12,6 @@ cd owlpane/api
 npx tsx scripts/build-starter-dashboards.ts ../owlpane-dashboards/library
 npm run build:starter-catalog
 npm run check:starter-catalog
-node ../owlpane-dashboards/scripts/audit-o2-stream-parity.mjs
 npm run test:library-local
 ```
 
