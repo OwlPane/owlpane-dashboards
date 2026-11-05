@@ -27,6 +27,4 @@ See [OWLPANE-METRICS.md](./Kubernetes(owlpane-otel-collector)/OWLPANE-METRICS.md
 
 ## Parity audit
 
-```bash
-node scripts/audit-o2-stream-parity.mjs
-```
+O2 stream parity was enforced by `scripts/audit-o2-stream-parity.mjs` (removed 2026-11); use Tier-1 contract tests in `owlpane-api` (`npm run check:starter-catalog`) and variable lint in this repo (`node scripts/lint-library-dashboard-variables.mjs`).
