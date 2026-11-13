@@ -17,3 +17,9 @@ The JSON file includes panels covering various essential metrics, such as:
 - Event Timeline View
 
 ![falco](./screenshots/falco_dashboard.gif)
+
+## Using Falco with Owlpane's own findings
+
+This export reads raw Falco log fields (`body_rule`, `body_output`) that Owlpane's log SQL does not produce, so most of its panels need data shaped like the original source.
+
+If you send Falco (or Tetragon) through the agent's `security-bridge`, use the [Runtime security](../runtime_security/README.md) dashboard instead. It is built on the findings the bridge writes and works as soon as the first one arrives.
