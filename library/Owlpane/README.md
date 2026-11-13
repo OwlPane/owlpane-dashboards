@@ -1,6 +1,6 @@
 # Owlpane platform dashboards
 
-Charts for **ingestion, agent, and SDK** telemetry in a tenant workspace (not OpenObserve `zo_*` internals).
+Charts for **ingestion, agent, and SDK** telemetry in a tenant workspace.
 
 ## Platform (lane A)
 

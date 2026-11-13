@@ -616,7 +616,7 @@
             "i": 6
           },
           "htmlContent": "",
-          "markdownContent": "Per-app rows (namespace, name, health, sync) need OpenObserve SQL on the `argocd_app_info` **metric stream**, which Owlpane does not expose as logs SQL. Use the **Healthy / Synced / Out of sync** charts above, or **Infrastructure → Kubernetes** for workload detail. Scrape labels: `health_status`, `sync_status`, `dest_namespace`, `name`.",
+          "markdownContent": "Per-app rows (namespace, name, health, sync) need a metric query on the `argocd_app_info` **metric stream**, which this library does not expose as logs SQL. Use the **Healthy / Synced / Out of sync** charts above, or **Infrastructure → Kubernetes** for workload detail. Scrape labels: `health_status`, `sync_status`, `dest_namespace`, `name`.",
           "customChartContent": ""
         },
         {

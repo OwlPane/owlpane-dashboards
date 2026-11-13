@@ -2,7 +2,7 @@
 
 Prebuilt observability dashboards for **Owlpane** in the **tabbed-grid (192-column)** JSON format, ready for one-click install from the Owlpane console or JSON import.
 
-Sources are refreshed with `scripts/sync-upstream.sh` and normalized by `scripts/normalize-for-owlpane.mjs`. See [ATTRIBUTION.md](./ATTRIBUTION.md) for Apache-2.0 source attribution.
+Sources are refreshed with `scripts/sync-upstream.sh` and normalized by `scripts/normalize-for-owlpane.mjs`. License: [Apache-2.0](./LICENSE). Upstream attribution: [ATTRIBUTION.md](./ATTRIBUTION.md).
 
 ## Layout
 

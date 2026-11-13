@@ -1,1 +1,5 @@
 .DS_Store
+
+# Apache-2.0 dashboard library only. Do not vendor the AGPL-3.0 engine here.
+/vendor/openobserve/
+/extras/openobserve/

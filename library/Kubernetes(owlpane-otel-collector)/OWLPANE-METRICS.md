@@ -6,7 +6,7 @@ CI enforces Tier-1 names against [`owlpane-api` `metrics-contract-tier1.ts`](../
 
 ## Use these names (not kube-state-metrics Prom streams)
 
-| OpenObserve / import name | Owlpane OTel metric |
+| Upstream import name | Owlpane OTel metric |
 |---------------------------|---------------------|
 | `k8s_pod_cpu_*` | `k8s.pod.cpu.time` |
 | `k8s_pod_memory_*` | `k8s.pod.memory.usage` |

@@ -154,7 +154,7 @@
           "id": "rbac-md",
           "type": "markdown",
           "title": "RBAC",
-          "markdownContent": "Service accounts, roles, and bindings are available under **Infrastructure → Kubernetes → Security** (fed by the cluster collector `k8s_objects` stream). OpenObserve-style join SQL is not used in this library dashboard.",
+          "markdownContent": "Service accounts, roles, and bindings are available under **Infrastructure → Kubernetes → Security** (fed by the cluster collector `k8s_objects` stream). Join SQL across streams is not used in this library dashboard.",
           "queryType": "sql",
           "queries": [
             {

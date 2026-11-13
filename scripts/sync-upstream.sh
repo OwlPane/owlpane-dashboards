@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Refresh library/ from openobserve/dashboards (Apache-2.0). We do not fork — download only.
+# Refresh library/ from the Apache-2.0 dashboard collection only. We do not fork — download only.
+# Do not point this script at the AGPL-3.0 engine, and do not vendor that engine under this repo.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 LIB="$ROOT/library"
