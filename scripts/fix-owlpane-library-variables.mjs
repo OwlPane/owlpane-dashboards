@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Rename OpenObserve-style dashboard variable names to Owlpane-importable identifiers.
+ * Rename upstream dashboard variable names to Owlpane-importable identifiers.
  * Preserves original JSON formatting (no full-file JSON.stringify).
  */
 import fs from "node:fs";

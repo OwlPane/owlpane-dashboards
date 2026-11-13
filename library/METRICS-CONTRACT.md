@@ -1,9 +1,9 @@
-# Metrics contract — library vs agent vs OpenObserve streams
+# Metrics contract — library vs agent streams
 
-| Layer | OpenObserve habit | Owlpane production |
+| Layer | Upstream stream habit | Owlpane production |
 |--------|-------------------|---------------------|
 | Series identity | `fields.stream` per panel (e.g. `k8s_pod_cpu_usage`) | **`MetricName`** in telemetry lake (`k8s.pod.cpu.time`) |
-| K8s pack folder | `Kubernetes(openobserve-collector)` | `Kubernetes(owlpane-otel-collector)` + **`Owlpane/`** tier |
+| K8s pack folder | upstream collector pack folder | `Kubernetes(owlpane-otel-collector)` + **`Owlpane/`** tier |
 | Events | `k8s_events` logs stream | Virtual SQL table over `ServiceName = 'kubernetes-cluster'` |
 | Variables | Dotted names (`k8s.namespace.name`) | Import-safe **`k8s_cluster`**, **`k8s_namespace`**, … |
 
@@ -27,4 +27,4 @@ See [OWLPANE-METRICS.md](./Kubernetes(owlpane-otel-collector)/OWLPANE-METRICS.md
 
 ## Parity audit
 
-O2 stream parity was enforced by `scripts/audit-o2-stream-parity.mjs` (removed 2026-11); use Tier-1 contract tests in `owlpane-api` (`npm run check:starter-catalog`) and variable lint in this repo (`node scripts/lint-library-dashboard-variables.mjs`).
+Stream-name parity is checked by Tier-1 contract tests in `owlpane-api` (`npm run check:starter-catalog`) and variable lint in this repo (`node scripts/lint-library-dashboard-variables.mjs`).

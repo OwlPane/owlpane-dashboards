@@ -12,7 +12,7 @@ You will be able to visualize the data in Owlpane in less than 2 minutes:
 
 **Step 2: Explore the dashboard:**
 <br>
-![explore-dashboards-in-o2](./explore-dashboards-in-o2.gif)
+![explore-dashboards](./explore-dashboards-in.gif)
 
 <br>
 

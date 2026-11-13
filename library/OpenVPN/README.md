@@ -12,4 +12,4 @@ The JSON file includes panels covering various critical metrics, such as:
 - Traffic Metrics: Monitor data transfer volumes to identify unusual spikes or bottlenecks.
 - Access Control Metrics: Keep track of allowed, denied, and CAPTCHA-challenged actions for compliance and security monitoring
 
-![OpenVPN](./screenshots/openvpn-o2-dashboards.gif)
+![OpenVPN](./screenshots/openvpn-dashboards.gif)

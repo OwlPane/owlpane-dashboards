@@ -5,8 +5,9 @@ Dashboard JSON under `library/` is derived from the
 
 - **Upstream:** https://github.com/openobserve/dashboards  
 - **License:** see [library/LICENSE](./library/LICENSE)  
-- **Owlpane changes:** display titles and chart colors are normalized for Owlpane branding; metric queries and panel
-  layout follow the source. SQL/log/map panels that Owlpane does not support are dropped at import/conversion time in
-  `owlpane-api` (see `scripts/build-starter-dashboards.ts`).
+- **Owlpane changes:** display titles, chart colors, sample stream names, and filenames are normalized for Owlpane.
+  Copyright lines in upstream files are left unchanged. Metric queries and panel layout otherwise follow the source.
+  SQL/log/map panels that Owlpane does not support are dropped at import/conversion time in `owlpane-api` (see
+  `scripts/build-starter-dashboards.ts`).
 
 Do not remove this notice when syncing from upstream.

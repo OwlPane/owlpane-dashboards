@@ -70,11 +70,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT route53_query_timestamp as \"x_axis_1\", count(route53_query_name) as \"y_axis_1\"  FROM \"route53_zinclabs_dev\"  GROUP BY x_axis_1",
+              "query": "SELECT route53_query_timestamp as \"x_axis_1\", count(route53_query_name) as \"y_axis_1\"  FROM \"route53\"  GROUP BY x_axis_1",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [
                   {
@@ -184,11 +184,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT route53_query_name as \"x_axis_1\", count(route53_query_name) as \"y_axis_1\"  FROM \"route53_zinclabs_dev\"  GROUP BY x_axis_1 ORDER BY y_axis_1 DESC limit 10",
+              "query": "SELECT route53_query_name as \"x_axis_1\", count(route53_query_name) as \"y_axis_1\"  FROM \"route53\"  GROUP BY x_axis_1 ORDER BY y_axis_1 DESC limit 10",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [
                   {
@@ -299,11 +299,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT route53_edge_location as \"x_axis_1\", count(route53_edge_location) as \"y_axis_1\"  FROM \"route53_zinclabs_dev\"  GROUP BY x_axis_1 ORDER BY y_axis_1 DESC limit 10",
+              "query": "SELECT route53_edge_location as \"x_axis_1\", count(route53_edge_location) as \"y_axis_1\"  FROM \"route53\"  GROUP BY x_axis_1 ORDER BY y_axis_1 DESC limit 10",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [
                   {
@@ -414,11 +414,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT route53_query_type as \"x_axis_1\", route53_query_name as \"x_axis_2\", count(route53_query_type) as \"y_axis_1\"  FROM \"route53_zinclabs_dev\"  GROUP BY x_axis_1, x_axis_2 ORDER BY y_axis_1 DESC limit 10",
+              "query": "SELECT route53_query_type as \"x_axis_1\", route53_query_name as \"x_axis_2\", count(route53_query_type) as \"y_axis_1\"  FROM \"route53\"  GROUP BY x_axis_1, x_axis_2 ORDER BY y_axis_1 DESC limit 10",
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [
                   {
@@ -535,11 +535,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT count(route53_query_name) as \"y_axis_1\"  FROM \"route53_zinclabs_dev\"",
+              "query": "SELECT count(route53_query_name) as \"y_axis_1\"  FROM \"route53\"",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [],
                 "y": [
@@ -639,11 +639,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT route53_resolver_ip as \"x_axis_1\", route53_query_name as \"x_axis_2\"  FROM \"route53_zinclabs_dev\"  GROUP BY x_axis_1, x_axis_2",
+              "query": "SELECT route53_resolver_ip as \"x_axis_1\", route53_query_name as \"x_axis_2\"  FROM \"route53\"  GROUP BY x_axis_1, x_axis_2",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [
                   {
@@ -700,7 +700,7 @@
         {
           "id": "Panel_ID1843010",
           "type": "geomap",
-          "title": "dev.zinclabs.dev geo",
+          "title": "dev.example.com geo",
           "description": "",
           "config": {
             "show_legends": true,
@@ -755,11 +755,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53_zinclabs_dev\"  WHERE route53_query_name IN ('dev.zinclabs.dev') GROUP BY latitude, longitude",
+              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53\"  WHERE route53_query_name IN ('dev.example.com') GROUP BY latitude, longitude",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [],
                 "y": [],
@@ -794,7 +794,7 @@
                     {
                       "type": "list",
                       "values": [
-                        "dev.zinclabs.dev"
+                        "dev.example.com"
                       ],
                       "column": "route53_query_name",
                       "operator": null,
@@ -829,7 +829,7 @@
         {
           "id": "Panel_ID2932210",
           "type": "geomap",
-          "title": "e1.zinclabs.dev geo",
+          "title": "e1.example.com geo",
           "description": "",
           "config": {
             "show_legends": true,
@@ -884,11 +884,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53_zinclabs_dev\"  WHERE route53_query_name IN ('e1.zinclabs.dev') GROUP BY latitude, longitude",
+              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53\"  WHERE route53_query_name IN ('e1.example.com') GROUP BY latitude, longitude",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [],
                 "y": [],
@@ -923,7 +923,7 @@
                     {
                       "type": "list",
                       "values": [
-                        "e1.zinclabs.dev"
+                        "e1.example.com"
                       ],
                       "column": "route53_query_name",
                       "operator": null,
@@ -958,7 +958,7 @@
         {
           "id": "Panel_ID6360110",
           "type": "geomap",
-          "title": "zinclabs.dev geo",
+          "title": "example.com geo",
           "description": "",
           "config": {
             "show_legends": true,
@@ -1013,11 +1013,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53_zinclabs_dev\"  WHERE route53_query_name IN ('zinclabs.dev') GROUP BY latitude, longitude",
+              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53\"  WHERE route53_query_name IN ('example.com') GROUP BY latitude, longitude",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [],
                 "y": [],
@@ -1052,7 +1052,7 @@
                     {
                       "type": "list",
                       "values": [
-                        "zinclabs.dev"
+                        "example.com"
                       ],
                       "column": "route53_query_name",
                       "operator": null,
@@ -1087,7 +1087,7 @@
         {
           "id": "Panel_ID8695410",
           "type": "geomap",
-          "title": "main.zinclabs.dev geo",
+          "title": "main.example.com geo",
           "description": "",
           "config": {
             "show_legends": true,
@@ -1142,11 +1142,11 @@
           "queryType": "sql",
           "queries": [
             {
-              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53_zinclabs_dev\"  WHERE route53_query_name IN ('main.dev.zinclabs.dev') GROUP BY latitude, longitude",
+              "query": "SELECT geo_latitude as latitude, geo_longitude as longitude, count(route53_query_name) as weight FROM \"route53\"  WHERE route53_query_name IN ('main.dev.example.com') GROUP BY latitude, longitude",
               "vrlFunctionQuery": "",
               "customQuery": false,
               "fields": {
-                "stream": "route53_zinclabs_dev",
+                "stream": "route53",
                 "stream_type": "logs",
                 "x": [],
                 "y": [],
@@ -1181,7 +1181,7 @@
                     {
                       "type": "list",
                       "values": [
-                        "main.dev.zinclabs.dev"
+                        "main.dev.example.com"
                       ],
                       "column": "route53_query_name",
                       "operator": null,

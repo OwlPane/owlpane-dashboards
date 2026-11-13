@@ -15,4 +15,4 @@ The JSON file includes panels covering various critical metrics, such as:
 - CloudTrail log and subscription monitoring
 
 
-![cloudtrail](./screenshots/cloudtrail_o2_dashboard.GIF)
+![cloudtrail](./screenshots/cloudtrail_dashboard.GIF)

@@ -22,3 +22,7 @@ jobs:
           node-version: "20"
       - name: Variable names (Owlpane NAME_RE)
         run: node scripts/lint-library-dashboard-variables.mjs
+      - name: No upstream residue in library JSON
+        run: node scripts/lint-upstream-residue.mjs
+      - name: Normalizer keeps copyright lines and strips sample streams
+        run: node --test scripts/normalize-for-owlpane.test.mjs

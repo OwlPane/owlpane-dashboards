@@ -9512,7 +9512,7 @@
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "_o2_service_graph",
+                "stream": "k8s_events",
                 "stream_type": "logs",
                 "x": [
                   {
@@ -10025,7 +10025,7 @@
               "vrlFunctionQuery": "",
               "customQuery": true,
               "fields": {
-                "stream": "_o2_service_graph",
+                "stream": "default",
                 "stream_type": "logs",
                 "x": [],
                 "y": [
