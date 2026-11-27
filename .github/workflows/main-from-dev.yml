@@ -1,0 +1,25 @@
+name: main-from-dev
+
+# main only takes the dev -> main release PR (branch policy); every other source fails this required check.
+on:
+  pull_request:
+    branches: [main]
+  merge_group:
+
+permissions: {}
+
+jobs:
+  source-is-dev:
+    name: main accepts dev only
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON_MAIN || '["self-hosted","linux","aws"]') }}
+    timeout-minutes: 2
+    steps:
+      - name: Check the PR source branch
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [ "$HEAD_REF" != "dev" ]; then
+            echo "::error::PRs into main must come from dev (got '$HEAD_REF'). Target dev instead."
+            exit 1
+          fi
